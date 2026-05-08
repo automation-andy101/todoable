@@ -6,7 +6,7 @@ import { Button } from './ui/button';
 import { Menu, PanelLeft } from 'lucide-react';
 
 export default function SidebarWrapper({ children }: { children: React.ReactNode }) {
-    const [sideNavOpen, setSideNavOpen] = useState(true);
+    const [sideNavOpen, setSideNavOpen] = useState(false);
 
     return (
         <div className="flex min-h-screen flex-col md:flex-row">

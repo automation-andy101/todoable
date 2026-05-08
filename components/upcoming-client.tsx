@@ -201,7 +201,7 @@ export default function UpcomingClient({ groupedTodos }: { groupedTodos: Record<
                             <div className="flex gap-2 sm:gap-6">
 
                                 {days.map((day) => {
-                                    const isSelected = day.toDateString() === currentDate.toDateString();
+                                    const isToday = day.toDateString() === new Date().toDateString();
 
                                     return (
                                         <button
@@ -211,9 +211,7 @@ export default function UpcomingClient({ groupedTodos }: { groupedTodos: Record<
                                                 router.push(`/upcoming?start=${formatDateLocal(start)}`)
                                             }}
                                             className={`flex flex-col gap-3 items-center p-2 rounded-md w-full transition ${
-                                                isSelected
-                                                ? "bg-black text-white"
-                                                : "hover:bg-gray-100 text-gray-700"
+                                                isToday ? "text-black font-bold" : "text-gray-500"
                                             }`}
                                         >
                                             <span className="text-xs">
