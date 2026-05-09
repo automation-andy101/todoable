@@ -84,40 +84,73 @@ export default function AddTaskDialog({
                         />
                     </div>
 
-                    <div className="flex items-center gap-2 mt-4">
-                        <Popover open={isDateOpen} onOpenChange={setIsDateOpen}>
-                            <PopoverTrigger asChild>
-                                <Button
-                                    type="button"
-                                    variant="outline"
-                                    className="rounded-full text-sm"
-                                >
-                                    Due: {
-                                        dueDate
-                                            ? dueDate.toLocaleDateString("en-GB", {
-                                                day: "numeric",
-                                                month: "short"
-                                            })
-                                            : "Today"
-                                    }
-                                </Button>
-                            </PopoverTrigger>
+                    <div className="flex items-center gap-2 mt-4 flex-wrap">
 
-                            <PopoverContent className="w-auto p-0">
-                                <Calendar
-                                    mode="single"
-                                    selected={dueDate}
-                                    onSelect={(date) => {
-                                        if (date) {
-                                            setDueDate(date);
-                                            setIsDateOpen(false);
+                        {/* Mobile native picker */}
+                        <div className="sm:hidden">
+                            <input
+                                type="date"
+                                value={
+                                    dueDate
+                                        ? dueDate.toISOString().split("T")[0]
+                                        : ""
+                                }
+                                onChange={(e) => {
+                                    setDueDate(new Date(e.target.value));
+                                }}
+                                className="
+                                    border rounded-full px-3 py-2 text-sm
+                                    bg-white
+                                "
+                            />
+                        </div>
+
+                        {/* Desktop calendar popover */}
+                        <div className="hidden sm:block">
+                            <Popover open={isDateOpen} onOpenChange={setIsDateOpen}>
+                                <PopoverTrigger asChild>
+                                    <Button
+                                        type="button"
+                                        variant="outline"
+                                        className="rounded-full text-sm"
+                                    >
+                                        Due: {
+                                            dueDate
+                                                ? dueDate.toLocaleDateString("en-GB", {
+                                                    day: "numeric",
+                                                    month: "short"
+                                                })
+                                                : "Today"
                                         }
-                                    }}
-                                    initialFocus
-                                />
-                            </PopoverContent>
-                        </Popover>
+                                    </Button>
+                                </PopoverTrigger>
 
+                                <PopoverContent
+                                    side="top"
+                                    align="start"
+                                    sideOffset={8}
+                                    avoidCollisions={false}
+                                    className="
+                                        w-auto p-0
+                                        max-w-[calc(100vw-2rem)]
+                                    "
+                                >
+                                    <Calendar
+                                        mode="single"
+                                        selected={dueDate}
+                                        onSelect={(date) => {
+                                            if (date) {
+                                                setDueDate(date);
+                                                setIsDateOpen(false);
+                                            }
+                                        }}
+                                        initialFocus
+                                    />
+                                </PopoverContent>
+                            </Popover>
+                        </div>
+
+                        {/* Priority */}
                         <Popover open={isPriorityOpen} onOpenChange={setIsPriorityOpen}>
                             <PopoverTrigger asChild>
                                 <Button
