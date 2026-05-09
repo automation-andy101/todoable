@@ -33,7 +33,7 @@ export default function SignUp() {
             if (result.error) {
                 setError(result.error.message ?? "Failed to sign up");
             } else {
-                router.push("/todo");
+                router.push("/today");
             }
         } catch (err) {
             setError("An unexpected error occurred");
