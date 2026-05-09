@@ -45,35 +45,108 @@ export default function Sidebar({ sideNavOpen, setSideNavOpen }: {
 
     return (
         <>
-            {/* <aside
-                className={`relative top-0 left-0 h-screen w-64 border-r bg-white p-4 transition-transform duration-300 ${
-                    sideNavOpen ? "translate-x-0" : "-translate-x-full"
-                }`}
-            >  */}
-
-            {/* 🔥 Overlay (mobile only) */}
+            {/* Overlay (mobile only) */}
             {sideNavOpen && (
                 <div
-                className="fixed inset-0 bg-black/30 z-30 md:hidden"
-                onClick={() => setSideNavOpen(false)}
+                    className="fixed inset-0 bg-black/30 z-30 md:hidden"
+                    onClick={() => setSideNavOpen(false)}
                 />
             )}
             
             <aside
                 className={`
-                    w-64
-                    h-screen
-                    bg-white border-r p-4
-                    fixed md:static
-                    z-40
+                    w-64 h-screen bg-white border-r p-4
+                    fixed md:static z-40
                     transition-transform duration-300
-
+                    flex flex-col
                     ${sideNavOpen ? "translate-x-0" : "-translate-x-full"}
                     md:translate-x-0
                 `}
             >
-                <nav className="flex flex-col gap-4">
-                    <div className="flex flex-row items-center justify-between pt-3 mb-4">
+                {/* MAIN NAV */}
+                <nav 
+                    className="flex flex-col gap-4"
+                >
+                    <Button 
+                        variant="ghost"
+                        onClick={() => {
+                            setSelectedAddDate(new Date())
+                            setIsAddTaskOpen(true)
+                        }}
+                        className={`${baseItemClass} text-red-500 font-semibold justify-start w-full cursor-pointer`}    
+                    >
+                        <CirclePlus size={18} />
+                        <span>Add task</span>
+                    </Button>
+                    <Link href="/today"
+                        onClick={() => setSideNavOpen(false)}
+                        className={`${baseItemClass} ${linkClass("/today")}`}
+                    >
+                        <ListTodo size={18} />
+                        <span>Today</span>
+                    </Link>
+                    <Link href="/upcoming"
+                        onClick={() => setSideNavOpen(false)}
+                        className={`${baseItemClass} ${linkClass("/upcoming")}`}    
+                    >
+                        <CalendarIcon size={18} />
+                        <span>Upcoming</span>
+                    </Link>
+                    <button
+                        onClick={() => {
+                            setIsSearchOpen(true)
+                            setSideNavOpen(false)
+                        }}
+                        className={`${baseItemClass} ${linkClass("/search")}`}
+                    >
+                        <Search size={18} />
+                        <span>Search</span>
+                    </button>
+                </nav>
+
+                {/* ACCOUNT SECTION */}
+                <div className="mt-auto border-t pt-4">
+                    <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                            <Button
+                                variant="ghost"
+                                className="w-full justify-between px-2 py-2"
+                            >
+                                <div className="flex items-center gap-3">
+                                    <Avatar className="h-8 w-8">
+                                        <AvatarFallback>
+                                            {session?.user?.name?.[0]?.toUpperCase()}
+                                        </AvatarFallback>
+                                    </Avatar>
+
+                                    <div className="flex flex-col text-left">
+                                        <span className="text-sm font-medium">
+                                            {firstName}
+                                        </span>
+
+                                        <span className="text-xs text-muted-foreground">
+                                            {session?.user?.email}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <ChevronDown className="h-4 w-4 text-gray-500" />
+                            </Button>
+                        </DropdownMenuTrigger>
+
+                        <DropdownMenuContent
+                            align="start"
+                            className="w-56"
+                        >
+                            <DropdownMenuLabel>
+                                Account
+                            </DropdownMenuLabel>
+
+                            <SignOutButton />
+                        </DropdownMenuContent>
+                    </DropdownMenu>
+                </div>
+                    {/* <div className="flex flex-row items-center justify-between pt-3 mb-4">
                         <DropdownMenu
                             onOpenChange={(open) => {
                                 if (!open) {
@@ -120,9 +193,7 @@ export default function Sidebar({ sideNavOpen, setSideNavOpen }: {
                                             <span className="text-sm font-medium">
                                                 {firstName}
                                             </span>
-                                            {/* <span className="text-xs text-muted-foreground">
-                                                {session?.user?.email}
-                                            </span> */}
+
                                         </div>
                                     </div>
 
@@ -136,9 +207,9 @@ export default function Sidebar({ sideNavOpen, setSideNavOpen }: {
                                 <SignOutButton />
                             </DropdownMenuContent>
                         </DropdownMenu>
-                    </div>
+                    </div> */}
                     
-                    <Button 
+                    {/* <Button 
                         variant="ghost"
                         onClick={() => {
                             setSelectedAddDate(new Date())
@@ -173,7 +244,7 @@ export default function Sidebar({ sideNavOpen, setSideNavOpen }: {
                         <Search size={18} />
                         <span>Search</span>
                     </button>
-                </nav>
+                </nav> */}
 
                 { /* Add Todo dialog popup */ }
                 <AddTaskDialog 
