@@ -55,18 +55,16 @@ export default function Sidebar({ sideNavOpen, setSideNavOpen }: {
             
             <aside
                 className={`
-                    w-64 h-dvh bg-white border-r p-4
+                    w-64 h-dvh bg-white border-r p-4 pt-20 md:pt-4
                     fixed md:static z-40
                     transition-transform duration-300
-                    flex flex-col
+                    flex flex-col overflow-hidden
                     ${sideNavOpen ? "translate-x-0" : "-translate-x-full"}
                     md:translate-x-0
                 `}
             >
                 {/* MAIN NAV */}
-                <nav 
-                    className="flex flex-col gap-4"
-                >
+                <nav className="flex flex-col gap-4 flex-1 overflow-y-auto">
                     <Button 
                         variant="ghost"
                         onClick={() => {
@@ -124,7 +122,10 @@ export default function Sidebar({ sideNavOpen, setSideNavOpen }: {
                                             {firstName}
                                         </span>
 
-                                        <span className="text-xs text-muted-foreground">
+                                        {/* <span className="text-xs text-muted-foreground">
+                                            {session?.user?.email}
+                                        </span> */}
+                                        <span className="hidden sm:block text-xs text-muted-foreground">
                                             {session?.user?.email}
                                         </span>
                                     </div>

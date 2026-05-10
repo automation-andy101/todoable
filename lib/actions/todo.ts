@@ -22,18 +22,48 @@ export async function createTodo(formData: FormData) {
     const dueDate = dueDateValue ? new Date(dueDateValue) : undefined;
     const description = descriptionValue?.trim() ? descriptionValue : undefined;
 
-    const todo = await Todo.create({
-        title,
-        description,
-        priority,
-        dueDate,
-        completed: false,
-        userId: session.user.id,
-    });
+    try {
+        console.log("createTodo called");
 
-    revalidatePath("/");
+        const title = formData.get("title");
+        console.log("title:", title);
 
-    return JSON.parse(JSON.stringify(todo));
+        console.log("des:", description);
+
+        console.log("priority:", priority);
+
+        console.log("dueDate:", dueDate);
+
+        // your existing session logic
+        console.log("session ok");
+
+        // your db connect logic
+        console.log("db connected");
+
+        // your create logic
+        console.log("creating todo");
+
+        const todo = await Todo.create({
+            title,
+            description,
+            priority,
+            dueDate,
+            completed: false,
+            userId: session.user.id,
+        });
+
+        console.log("todo created:", todo);
+
+        revalidatePath("/");
+
+        return JSON.parse(JSON.stringify(todo));
+
+    } catch (error) {
+        console.error("CREATE TODO ERROR:");
+        console.error(error);
+
+        throw error;
+    }
 }
 
 export async function getUpcomingTodos() {

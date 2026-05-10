@@ -185,6 +185,12 @@ export default function AddTaskDialog({
                             </PopoverContent>
                             
                             <input type="hidden" name="priority" value={priority} />
+
+                            <input
+                                type="hidden"
+                                name="dueDate"
+                                value={dueDate ? dueDate.toISOString() : ""}
+                            />
                         </Popover>
                     </div>
 

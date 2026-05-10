@@ -32,7 +32,7 @@ export default function SidebarWrapper({ children }: { children: React.ReactNode
                 <Button
                     variant="ghost"
                     size="icon"
-                    onClick={() => setSideNavOpen(true)}
+                    onClick={() => setSideNavOpen(!sideNavOpen)}
                 >
                     <Menu className="w-6 h-6" />
                 </Button>
