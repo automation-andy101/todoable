@@ -55,7 +55,7 @@ export default function Sidebar({ sideNavOpen, setSideNavOpen }: {
             
             <aside
                 className={`
-                    w-64 h-screen bg-white border-r p-4
+                    w-64 h-dvh bg-white border-r p-4
                     fixed md:static z-40
                     transition-transform duration-300
                     flex flex-col
